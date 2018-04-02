@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    /*列表默认样式*/
+
+    text-decoration: none;
+    /*a链接下划线*/
+    font-style: normal;
+}
+/*.clearfix:after{*/
+    /*content: "\200B";*/
+    /*display: block;*/
+    /*height: 0;*/
+    /*clear: both;*/
+/*}*/

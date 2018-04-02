@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>效果(手机左滑删除)</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+
+            overflow: hidden;
+        }
+        li{
+            width: 100vw;
+            height: 15vh;
+            background: #ccc;
+            line-height: 15vh;
+            position: relative;
+            border-bottom: 1px solid #ffffff;
+        }
+        li div{
+            width: 20vw;
+            height: 15vh;
+            background: #ff3333;
+            text-align: center;
+            line-height: 15vh;
+            position: absolute;
+            right: -20vw;
+            top:0;
+            color: #fff;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>1
+        <div>删除</div>
+    </li>
+    <li>2
+        <div>删除</div>
+    </li>
+    <li>3
+        <div>删除</div>
+    </li>
+    <li>4
+        <div>删除</div>
+    </li>
+    <li>5
+        <div>删除</div>
+    </li>
+</ul>
+<script src="JS/hammer.js"></script>
+    <script>
+        var lis=document.querySelectorAll("li");
+        lis.forEach(function (ele,index) {
+            // let hammerobj=new Hammer(ele);
+            var sx,movex;//此处作用域大
+            var max=window.innerWidth/5;//窗口宽度的5分之一
+            var state="start";//状态
+            var flag=true;//决定手指离开之后，要不要有动画的变量
+            ele.ontouchstart=function (e) {
+                sx=e.changedTouches[0].clientX;//clientX。距离窗口左边的位置
+                ele.style.transition="";//把end那的值覆盖掉
+            };
+            ele.ontouchmove=function (e) {
+                var cx=e.changedTouches[0].clientX;
+                movex=cx-sx;
+                if(movex>0&&state==="start"){
+                    flag=false;//此处不加也可以
+                    return;
+                }
+                if(movex<0&&state==="end"){
+                    flag=false;//此处不加也可以
+                    return;
+                }
+                if(Math.abs(movex)>max){
+                    flag=false;//此处需加
+                    state=state==="start"?"end":"start";
+                    return;
+                }
+                if(state==="end"){
+                    movex=-max+cx-sx;
+                }
+                flag=true;
+                ele.style.transform=`translate(${movex}px)`;
+            };
+            ele.ontouchend=function () {
+                if(!flag){return}
+                ele.style.transition="all .5s";
+                if(Math.abs(movex)>max/2){
+                    ele.style.transform=`translateX(${-max}px)`;
+                    state="end";
+                }else{
+                    ele.style.transform=`translateX(0px)`;
+                    state="start";
+                }
+            }
+        })
+    </script>
+</body>
+</html>

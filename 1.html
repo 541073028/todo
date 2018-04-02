@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>移动端</title>
+    <style>
+        .demo{
+            width: 100px;
+            height: 100px;
+            background: #ffac13;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo">
+
+    </div>
+
+<script>
+    let demo=document.querySelector(".demo");
+    // demo.onclick=function () {
+    //     alert(1);
+    // };
+    //touchStart  onTouchMove  onTouchEnd  ontouchcancel
+    //h5新增事件：
+    // demo.ontouchstart=function (e) {
+    //     console.log("触摸开始");
+    //     console.log(e);//查看属性
+    // };
+    // demo.ontouchmove=function () {
+    //     console.log("触摸移动")
+    // };
+    // demo.ontouchend=function () {
+    //     console.log("触摸结束")
+    // };
+
+    var sx,sy,movex,movey,ex=0,ey=0;
+    // sx,sy每次触摸开始的位置；
+    // movex,movey当前这一次触摸移动的位置；
+    // ex,ey保存元素上一次的位移值
+    demo.ontouchstart=function (e) {
+        sx=e.changedTouches[0].clientX;//距离屏幕X,Y距离位置
+        sy=e.changedTouches[0].clientY;
+    };
+    // timeStamp:
+    demo.ontouchmove=function (e) {
+        var cx=e.changedTouches[0].clientX;
+        var cy=e.changedTouches[0].clientY;
+        movex=cx-sx;
+        movey=cy-sy;
+        // demo.style.transform=`translate(${cx-sx}px,${cy-sy}px)`
+        demo.style.transform=`translate(${ex+movex}px,${ey+movey}px)`
+        //移动端，计算位移时,用transform
+    };
+    demo.ontouchend=function () {
+        ex+=movex;
+        ey+=movey;
+        // var ex=e.changedTouches[0].clientX;
+        // var ey=e.changedTouches[0].clientY;
+        // let exy=demo.style.transform=`translate(${ex}px,${ey}px)`
+    };
+
+</script>
+</body>
+</html>

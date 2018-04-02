@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .demo{
+            width: 100px;
+            height: 100px;
+            background: #1f18ff;
+        }
+    </style>
+</head>
+<body>
+<div class="demo">
+
+</div>
+<script src="JS/hammer.js"></script>
+<script>
+    let demo=document.querySelector(".demo");
+    let hammerobj=new Hammer(demo);
+    hammerobj.on("tap",function () {
+        console.log("tap事件")
+    });
+    hammerobj.on("press",function () {
+        console.log("长按事件")
+    });
+    hammerobj.on("swipe",function () {
+        console.log("滑动事件")
+    });
+    hammerobj.on("pan",function () {
+        console.log("拖动事件")
+    });
+</script>
+
+</body>
+</html>

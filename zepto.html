@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>zepto.js</title>
+    <!--zepto.js是缩小版的jQuery，适用于移动端，-->
+
+    <!--加载速度快；-->
+    <!--只支持现代浏览器；-->
+    <!--开发原生app方便；-->
+    <!--源码清晰简洁，利于学习-->
+
+    <style>
+        .demo{
+            width: 100px;
+            height: 100px;
+            background: #fe794a;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo">
+
+</div>
+    <script src="JS/zepto.js"></script>
+    <script src="JS/touch.js"></script>
+    <script>
+        $(".demo").tap(function (e) {
+            console.log("tap事件")
+        });
+        $(".demo").doubleTap(function () {
+            console.log("双击事件")
+        });
+        $(".demo").longTap(function () {
+            console.log("长按事件")
+        });
+        $(".demo").swipe(function () {
+            console.log("滑动事件")
+        });
+
+    </script>
+
+</body>
+</html>
